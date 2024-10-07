@@ -18,24 +18,24 @@ public class ContractService {
 
     private final Web3j web3j;
     private final Credentials credentials;
-    private final SimpleStorage contracts;
+    private final SimpleStorage contract;
     private static final Logger log = LoggerFactory.getLogger(EthereumConnection.class);
 
     @Autowired
     public ContractService(Web3j web3j) {
         this.web3j = web3j;
         this.credentials = Credentials.create("");
-        this.contracts = SimpleStorage.load("", web3j, credentials, new DefaultGasProvider());
+        this.contract = SimpleStorage.load("", web3j, credentials, new DefaultGasProvider());
     }
 
     public void setValue(BigInteger value) throws Exception {
-        contracts.set(value).send();
-        log.info("" + value);
+        contract.set(value).send();
+        log.info("SimpleStorage contract loaded at address: {}", contract.getContractAddress());
     }
 
     public BigInteger getValue() throws Exception {
-        BigInteger storedData = contracts.get().send();
-        log.info(""  + storedData);
+        BigInteger storedData = contract.get().send();
+        log.info("Retrieved value from the contract: {}", storedData);
         return storedData;
     }
 }

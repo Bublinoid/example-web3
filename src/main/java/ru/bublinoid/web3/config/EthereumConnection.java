@@ -15,7 +15,7 @@ public class EthereumConnection {
     @Bean
     public static Web3j connectionToEthereum() {
         Web3j web3j = Web3j.build(new HttpService("http://localhost:8455"));
-        logger.info("Connecting to Ethereum success");
+        logger.info("Successfully connected to Ethereum network");
         return web3j;
     }
 }
